@@ -68,7 +68,7 @@ Example:
 ```
 readl("Type your name > ");
 ```
-Currently you cant store this into a variable
+Currently you can not store this into a variable
 
 ---
 Under progress, see [Projects](https://github.com/robi0t/Shelf/projects/1) 
