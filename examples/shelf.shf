@@ -7,14 +7,13 @@ set banner =
  |_____/|_| |_|\___|_|_|
 ";
 
-define printwelcome(none)
+define printwelcome(_banner)
 {
-    say(banner);
+    say(_banner);
     say("Welcome to Shelf");
 };
 
-printwelcome();
-
+printwelcome(banner);
 waitfkey("Press any key to continue");
 say("You pressed a key!!!");
 readl("Type something > ")
