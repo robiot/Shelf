@@ -11,7 +11,6 @@ $(exec): $(objects)
 	mkdir -p build/src
 	gcc -c $(flags) $< -o build/$@
 
-
 install:
 	make
 
