@@ -1,8 +1,24 @@
-*--Pre-Alpha*
+<h1 align="center">
+  <br>
+  <img src="https://raw.githubusercontent.com/robi0t/Shelf/main/img/shelf.png" alt="Markdownify" width="300">
+  <br>
+  Shelf Programming Language
+  <br>
+</h1>
 
-Shelf Programming Language
-------------------------
-A very simple interpreter that currently supports a few functions ↓ See [Examples](https://github.com/robi0t/Shelf/tree/main/examples)
+<h4 align="center">A very simple interpreter that currently supports a few functions ↓ See <a href="https://github.com/robi0t/Shelf/tree/main/examples">Examples</a></h4>
+
+<p align="center">
+  <a href="#making-a-hello-world-program">Hello World</a> •
+  <a href="#set-a-variable-and-say-it">Set Variable</a> •
+  <a href="#define-a-function-and-call-it">Define Function</a> •
+  <a href="#wait-until-any-key-is-pressed">Buildin Functions</a> •
+  <a href="./LICENSE">License</a>
+</p>
+
+<p align="center"><i>--Pre-Alpha</i></p>
+
+
 
 
 Making a "Hello World" program 
