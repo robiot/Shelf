@@ -1,3 +1,5 @@
+*--Pre-Alpha*
+
 Shelf Programming Language
 ------------------------
 A very simple interpreter that currently supports a few functions ↓ See [Examples](https://github.com/robi0t/Shelf/tree/main/examples)
