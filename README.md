@@ -12,7 +12,7 @@
   <a href="#making-a-hello-world-program">Hello World</a> •
   <a href="#set-a-variable-and-say-it">Set Variable</a> •
   <a href="#define-a-function-and-call-it">Define Function</a> •
-  <a href="#wait-until-any-key-is-pressed">Buildin Functions</a> •
+  <a href="#wait-until-any-key-is-pressed">Builtin Functions</a> •
   <a href="./LICENSE">License</a>
 </p>
 
