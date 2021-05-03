@@ -19,7 +19,9 @@
 <p align="center"><i>--Pre-Alpha</i></p>
 <br>
 
-
+About
+------------------------
+This is a currently in a **very** early stage so don't expect anything good
 
 
 Making a "Hello World" program 
