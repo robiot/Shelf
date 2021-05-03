@@ -1,0 +1,20 @@
+set banner = 
+"   _____ _          _  __ 
+  / ____| |        | |/ _|
+ | (___ | |__   ___| | |_ 
+  \___ \| '_ \ / _ \ |  _|
+  ____) | | | |  __/ | |  
+ |_____/|_| |_|\___|_|_|
+";
+
+define printwelcome(none)
+{
+    say(banner);
+    say("Welcome to Shelf");
+};
+
+printwelcome();
+
+waitfkey("Press any key to continue");
+say("You pressed a key!!!");
+readl("Type something > ")
