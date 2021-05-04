@@ -13,12 +13,7 @@ define printwelcome(_banner)
     say("Welcome to Shelf");
 };
 
-<<<<<<< HEAD
-printwelcome(banner);
-=======
-printwelcome(); #this is a comment
-
->>>>>>> 99a9b7e (Update)
+printwelcome(banner); #this is a comment
 waitfkey("Press any key to continue");
 say("You pressed a key!!!");
 readl("Type something > ")

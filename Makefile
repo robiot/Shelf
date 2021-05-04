@@ -15,11 +15,5 @@ install:
 	make
 
 clean:
-<<<<<<< HEAD
-	-rm *.out
-	-rm *.o
-	-rm src/*.o
-=======
 	-rm build/src/*.out
 	-rm build/src/*.o
->>>>>>> 99a9b7e (Update)
