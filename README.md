@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://raw.githubusercontent.com/robi0t/Shelf/main/img/shelf.png" alt="Markdownify" width="300">
+  <img src="https://raw.githubusercontent.com/robi0t/Shelf/main/img/shelf.png" alt="Shelf" width="300">
   <br>
   Shelf Programming Language
   <br>
