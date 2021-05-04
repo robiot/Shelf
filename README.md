@@ -72,5 +72,13 @@ readl("Type your name > ");
 ```
 Currently you can not store this into a variable
 
+Comments
+------------------------
+To make a inline comment you use `#`
+Example:
+```
+# This is a comment
+```
+
 ---
 Under progress, see [Projects](https://github.com/robi0t/Shelf/projects/1) 
