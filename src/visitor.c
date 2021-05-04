@@ -186,8 +186,8 @@ AST_T* visitor_visit_function_call(visitor_T* visitor, AST_T* node)
         exit(1);
     }
 
-
-    if (fdef->function_definition_args_size == node->function_call_arguments_size){
+    //scope_T* function_definition_body_scope = (scope_T*) fdef->function_definition_body->scope;
+    if (fdef->function_definition_args_size == node->function_call_arguments_size || 1 == node->function_call_arguments_size){
         for (int i = 0; i < fdef->function_definition_args_size; i++) // (int i = 0; i < (int) node->function_call_arguments_size; i++)
         {
             AST_T* ast_var = (AST_T*) fdef->function_definition_args[i];
@@ -202,12 +202,11 @@ AST_T* visitor_visit_function_call(visitor_T* visitor, AST_T* node)
 
             scope_add_variable_definition(fdef->function_definition_body->scope, ast_vardef); //push variable definition into function
         
-            //TODO: check if arguments given matches the amount of required by the function
         }
     }
-    else if(fdef->function_definition_args_size != node->function_call_arguments_size)
+    else
     {
-        printf("Function \"%s\" missing \"%d\" required arguments [Line: %d]\n", node->function_call_name, fdef->function_definition_args_size-node->function_call_arguments_size);
+        printf("Function \"%s\" Expected %d arguments but got %d arguments\n", node->function_call_name, fdef->function_definition_args_size, node->function_call_arguments_size);
         exit(1);
     }
 

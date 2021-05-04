@@ -13,7 +13,12 @@ define printwelcome(_banner)
     say("Welcome to Shelf");
 };
 
+define noargs(){
+  say("Function without args :))")
+};
+
 printwelcome(banner); #this is a comment
+noargs(); #to test noargs
 waitfkey("Press any key to continue");
 say("You pressed a key!!!");
 readl("Type something > ");
