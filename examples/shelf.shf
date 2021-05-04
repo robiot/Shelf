@@ -16,4 +16,6 @@ define printwelcome(_banner)
 printwelcome(banner); #this is a comment
 waitfkey("Press any key to continue");
 say("You pressed a key!!!");
-readl("Type something > ")
+readl("Type something > ");
+
+#say("This wont execute");
