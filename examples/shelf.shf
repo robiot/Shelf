@@ -13,7 +13,7 @@ define printwelcome(none)
     say("Welcome to Shelf");
 };
 
-printwelcome();
+printwelcome(); #this is a comment
 
 waitfkey("Press any key to continue");
 say("You pressed a key!!!");
