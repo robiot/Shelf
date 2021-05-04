@@ -1,9 +1,11 @@
-#include "include/lexer.h"
+#include "include/lex.h"
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdio.h>
 
+
+//Create a new lexer
 lexer_T* init_lexer(char* contents)
 {
     lexer_T* lexer = calloc(1, sizeof(struct LEXER_STRUCT));
@@ -13,6 +15,14 @@ lexer_T* init_lexer(char* contents)
     return lexer;
 }
 
+//Advances and returns a token
+token_T* lexer_advance_with_token(lexer_T* lexer, token_T* token)
+{
+    lexer_advance(lexer);
+    return token;
+}
+
+//Advance - move to next char
 void lexer_advance(lexer_T* lexer)
 {
     if (lexer->c != '\0' && lexer->i < strlen(lexer->contents)) // checks if c is not equals to null
@@ -26,37 +36,41 @@ void lexer_advance(lexer_T* lexer)
     }
 }
 
+
+//Move to next character until there is no more whitespace
 void lexer_skip_whitespace(lexer_T* lexer)
 {
-    while (lexer->c == ' ' || lexer-> c == 10) //10 ==  new line
+    while (lexer->c == ' ' || (int) lexer-> c == 10 || (int) lexer->c == 13) //10 ==  new line
     {
         lexer_advance(lexer);
     }
 }
 
+//Skip an inline comment
 void lexer_skip_inline_comment(lexer_T* lexer)
 {
     while (lexer->c != '\n' && lexer->c != 10)
         lexer_advance(lexer);
 }
 
+//Get the next token from the lexer
 token_T* lexer_get_next_token(lexer_T* lexer)
 {
     while (lexer->c != '\0' && lexer->i < strlen(lexer->contents))
     {
-        if (lexer->c == ' ' || lexer-> c == 10)
+        if (lexer->c == ' ' || (int) lexer-> c == 10 || (int) lexer->c == 13)
             lexer_skip_whitespace(lexer);
 
         if (isalnum(lexer->c) || lexer->c == '_')
             return lexer_collect_id(lexer);
             
         
-        /*if (lexer->c == '#')
+        if (lexer->c == '#')
         {
             lexer_advance(lexer);
             lexer_skip_inline_comment(lexer);
             continue;
-        }*/
+        }
 
         switch (lexer->c)
         {
@@ -74,7 +88,7 @@ token_T* lexer_get_next_token(lexer_T* lexer)
     return init_token(TOKEN_EOF, "\0");
 }
 
-
+//Collects a string token
 token_T* lexer_collect_string(lexer_T* lexer)
 {
     lexer_advance(lexer);
@@ -96,6 +110,9 @@ token_T* lexer_collect_string(lexer_T* lexer)
     return init_token(TOKEN_STRING, value);
 }
 
+//Todo: collect numbers
+
+//Collect an Id token
 token_T* lexer_collect_id(lexer_T* lexer)
 {
     char* value = calloc(1, sizeof(char));
@@ -113,13 +130,8 @@ token_T* lexer_collect_id(lexer_T* lexer)
     return init_token(TOKEN_ID, value);
 }
 
-token_T* lexer_advance_with_token(lexer_T* lexer, token_T* token)
-{
-    lexer_advance(lexer);
-    return token;
-}
-
-char* lexer_get_current_char_as_string(lexer_T* lexer) // makes char into string
+//Return current char of lexer as a string
+char* lexer_get_current_char_as_string(lexer_T* lexer)
 {
     char* str = calloc(2, sizeof(char));
     str[0] = lexer->c;
