@@ -21,7 +21,7 @@
 
 About
 ------------------------
-This is a currently in a **very** early stage so don't expect anything good
+This is a currently in a **very** early stage so don't expect anything good\
 If you would like to test this in its pre-alpha stage, please post issues on any bug you find
 
 Making a "Hello World" program 
