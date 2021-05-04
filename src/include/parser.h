@@ -1,6 +1,6 @@
 #ifndef PARSER_H
 #define PARSER_H
-#include "lexer.h"
+#include "lex.h"
 #include "AST.h"
 #include "scope.h"
 
