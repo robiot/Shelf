@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "include/lexer.h"
+#include "include/lex.h"
 #include "include/parser.h"
 #include "include/visitor.h"
 #include "include/io.h"

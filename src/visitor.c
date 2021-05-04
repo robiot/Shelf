@@ -53,7 +53,6 @@ static AST_T* builtin_function_readline(visitor_T* visitor, AST_T** args, int ar
         if (args_size == 2)
         {
             //store variable
-            //printf("%s", node->variable_name);
         }
     }
     return init_ast(AST_NOOP);
