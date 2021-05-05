@@ -84,7 +84,7 @@ Example:
 /*
 This is inside a block comment
 :)
-'/
+*/
 ```
 
 ---
