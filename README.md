@@ -51,7 +51,6 @@ define _function(name){
 
 _function("John Doe");
 ```
-At the moment it does not support no arguments in a function, so you can use none, `define functionname(none)`
 
 Wait until any key is pressed
 ------------------------
@@ -74,10 +73,18 @@ Currently you can not store this into a variable
 
 Comments
 ------------------------
-To make a inline comment you use `#`
+To make a inline comment you use `//`
 Example:
 ```
-# This is a comment
+// This is a comment
+```
+To make a block comment you use `/*`(open)`*/`(close)
+Example:
+```
+/*
+This is inside a block comment
+:)
+'/
 ```
 
 ---

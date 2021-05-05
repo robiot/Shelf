@@ -20,12 +20,7 @@ parser_T* init_parser(lexer_T* lexer)
 //same as the expected one
 void parser_eat(parser_T* parser, int token_type)
 {
-    if (parser->current_token->type == token_type)
-    {
-        parser->prev_token = parser->current_token;
-        parser->current_token = lexer_get_next_token(parser->lexer);
-    }
-    else
+    if (parser->current_token->type != token_type)
     {
         printf(
             "Unexpected token `%s`, with type %d",
@@ -34,6 +29,9 @@ void parser_eat(parser_T* parser, int token_type)
         );
         exit(1);
     }
+
+    parser->prev_token = parser->current_token;
+    parser->current_token = lexer_get_next_token(parser->lexer);
 }
 
 //Main entry point of the parser
@@ -90,8 +88,10 @@ AST_T* parser_parse_expr(parser_T* parser, scope_T* scope)
 {
     switch (parser->current_token->type)
     {
-        case TOKEN_STRING: return parser_parse_string(parser, scope);
         case TOKEN_ID: return parser_parse_id(parser, scope);
+        case TOKEN_STRING: return parser_parse_string(parser, scope);
+        case TOKEN_INT: return parser_parse_int(parser, scope);
+        //default: { printf("Unexpected token `%s`\n", token_to_str(parser->current_token)); exit(1); };
     }
 
     return init_ast(AST_NOOP);
@@ -221,6 +221,16 @@ AST_T* parser_parse_string(parser_T* parser, scope_T* scope)
 }
 
 //TODO: Parse numbers
+AST_T* parser_parse_int(parser_T* parser, scope_T* scope)
+{
+    int int_value = atoi(parser->current_token->value);
+    parser_eat(parser, TOKEN_INT);
+
+    AST_T* ast_int = init_ast(AST_INT);
+    ast_int->int_value = int_value;
+    ast_int->scope = scope;
+    return ast_int;
+}
 
 //Parse a id
 AST_T* parser_parse_id(parser_T* parser, scope_T* scope)

@@ -119,6 +119,7 @@ AST_T* visitor_visit(visitor_T* visitor, AST_T* node)
         case AST_VARIABLE: return visitor_visit_variable(visitor, node); break;
         case AST_FUNCTION_CALL: return visitor_visit_function_call(visitor, node); break;
         case AST_STRING: return visitor_visit_string(visitor, node); break;
+        case AST_INT: return visitor_visit_number(visitor, node); break;
         case AST_COMPOUND: return visitor_visit_compound(visitor, node); break;
         case AST_NOOP: return node; break;
         default: printf("Uncaught statement of type %d\n", node->type); exit(1); break;
@@ -214,6 +215,11 @@ AST_T* visitor_visit_function_call(visitor_T* visitor, AST_T* node)
 }
 
 AST_T* visitor_visit_string(visitor_T* visitor, AST_T* node)
+{
+    return node;
+}
+
+AST_T* visitor_visit_number(visitor_T* visitor, AST_T* node)
 {
     return node;
 }

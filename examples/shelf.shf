@@ -14,11 +14,16 @@ define printwelcome(_banner)
 };
 
 define noargs(){
-  say("Function without args :))")
+  say("Function without args :))");
 };
 
-printwelcome(banner); #this is a comment
-noargs(); #to test noargs
+//Inline comment
+/*
+say("This will not run because its inside a comment block");
+*/
+
+printwelcome(banner);
+noargs();
 waitfkey("Press any key to continue");
 say("You pressed a key!!!");
 readl("Type something > ");
