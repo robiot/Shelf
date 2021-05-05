@@ -1,15 +1,15 @@
 #include "include/lex.h"
-#include <stdlib.h>
+#include "include/macros.h"
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
-#include <stdio.h>
-
 
 //Create a new lexer
 lexer_T* init_lexer(char* contents)
 {
     lexer_T* lexer = calloc(1, sizeof(struct LEXER_STRUCT));
     lexer->contents = contents;
+    lexer->contents_size = strlen(contents);
     lexer->i=0;
     lexer->c=contents[lexer->i];
     return lexer;
@@ -36,21 +36,48 @@ void lexer_advance(lexer_T* lexer)
     }
 }
 
+char lexer_peek(lexer_T* lexer, int offset)
+{
+  return lexer->contents[MIN(lexer->i + offset, lexer->contents_size)];
+}
 
 //Move to next character until there is no more whitespace
 void lexer_skip_whitespace(lexer_T* lexer)
 {
-    while (lexer->c == ' ' || (int) lexer-> c == 10 || (int) lexer->c == 13) //10 ==  new line
-    {
+    while (lexer->c == ' ' || (int) lexer-> c == 10 || (int) lexer->c == 13 || lexer->c == '\t') //10 ==  new line
         lexer_advance(lexer);
-    }
 }
 
 //Skip an inline comment
-void lexer_skip_inline_comment(lexer_T* lexer)
+void lexer_skip_comment(lexer_T* lexer)
 {
-    while (lexer->c != '\n' && lexer->c != 10)
-        lexer_advance(lexer);
+    /*while (lexer->c != '\n' && lexer->c != 10)
+        lexer_advance(lexer);*/
+
+    if (lexer->c == '/')
+    {
+        if (lexer_peek(lexer, 1) == '/') 
+        {
+        while (lexer->c != '\n')
+            lexer_advance(lexer);
+        }
+        else
+        if (lexer_peek(lexer, 1) == '*')
+        {
+        while (1) {
+            if (lexer->c == '*' && lexer_peek(lexer, 1) == '/')
+            {
+            lexer_advance(lexer);
+            lexer_advance(lexer);
+            break;
+            }
+
+            lexer_advance(lexer);
+        }
+        }
+    }
+    
+    lexer_skip_whitespace(lexer);
 }
 
 //Get the next token from the lexer
@@ -58,19 +85,22 @@ token_T* lexer_get_next_token(lexer_T* lexer)
 {
     while (lexer->c != '\0' && lexer->i < strlen(lexer->contents))
     {
-        if (lexer->c == ' ' || (int) lexer-> c == 10 || (int) lexer->c == 13)
-            lexer_skip_whitespace(lexer);
+        lexer_skip_comment(lexer);
+        lexer_skip_whitespace(lexer);
 
-        if (isalnum(lexer->c) || lexer->c == '_')
-            return lexer_collect_id(lexer);
-            
-        
-        if (lexer->c == '#')
+        /*if (lexer->c == '#')
         {
             lexer_advance(lexer);
             lexer_skip_inline_comment(lexer);
             continue;
-        }
+        }*/
+
+        if (isalpha(lexer->c) || lexer->c == '_') //isalpha?
+            return lexer_collect_id(lexer);
+        
+        if (isdigit(lexer->c))
+            return lexer_collect_number(lexer);
+        
 
         switch (lexer->c)
         {
@@ -82,6 +112,10 @@ token_T* lexer_get_next_token(lexer_T* lexer)
             case '{': return lexer_advance_with_token(lexer, init_token(TOKEN_LBRACE, lexer_get_current_char_as_string(lexer))); break;
             case '}': return lexer_advance_with_token(lexer, init_token(TOKEN_RBRACE, lexer_get_current_char_as_string(lexer))); break;
             case ',': return lexer_advance_with_token(lexer, init_token(TOKEN_COMMA, lexer_get_current_char_as_string(lexer))); break;
+
+            case '/': break; //todo fix maths
+            case '*': break; 
+            case '\0': break;
             //case '+': return lexer_advance_with_token(lexer, init_token(TOKEN_PLUS, lexer_get_current_char_as_string(lexer))); break;
             default: printf("Unexpected %c\n", lexer->c); exit(1); break;
         }
@@ -112,6 +146,19 @@ token_T* lexer_collect_string(lexer_T* lexer)
 }
 
 //Todo: collect numbers
+token_T* lexer_collect_number(lexer_T* lexer)
+{
+    char* value = calloc(1, sizeof(char));
+
+    while (isdigit(lexer->c))
+    {
+        value = realloc(value, (strlen(value) + 2) * sizeof(char));
+        strcat(value, (char[]){lexer->c, 0});
+        lexer_advance(lexer);
+    }
+
+    return init_token(TOKEN_INT, value);
+}
 
 //Collect an Id token
 token_T* lexer_collect_id(lexer_T* lexer)

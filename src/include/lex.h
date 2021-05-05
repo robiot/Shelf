@@ -1,13 +1,14 @@
 #ifndef LEXER_H
 #define LEXER_H
 #include "token.h"
-
+#include <stdio.h>
 
 typedef struct LEXER_STRUCT
 {
     char c; //current char
     unsigned int i; //index
     char* contents; //input code content
+    size_t contents_size;
 
 } lexer_T;
 
@@ -17,9 +18,13 @@ void lexer_advance(lexer_T* lexer);
 
 void lexer_skip_whitespace(lexer_T* lexer);
 
+void lexer_skip_comment(lexer_T* lexer);
+
 token_T* lexer_get_next_token(lexer_T* lexer);
 
 token_T* lexer_collect_string(lexer_T* lexer);
+
+token_T* lexer_collect_number(lexer_T* lexer);
 
 token_T* lexer_collect_id(lexer_T* lexer);
 

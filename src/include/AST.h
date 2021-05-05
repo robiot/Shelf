@@ -10,6 +10,7 @@ typedef struct AST_STRUCT
         AST_VARIABLE,
         AST_FUNCTION_CALL,
         AST_STRING,
+        AST_INT,
         AST_COMPOUND,
         AST_NOOP
     } type;
@@ -36,7 +37,10 @@ typedef struct AST_STRUCT
     size_t function_call_arguments_size;
 
     /* AST_STRING */
-    char* string_value; //todo: fix this shit
+    char* string_value;
+
+    /* AST_INT */
+    int int_value;
 
     /* AST_COMPOUND */
     struct AST_STRUCT** compound_value;

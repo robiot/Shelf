@@ -6,6 +6,7 @@ typedef struct TOKEN_STRUCT
     {
         TOKEN_ID,
         TOKEN_EQUALS,
+        TOKEN_INT,
         TOKEN_STRING,
         TOKEN_SEMI,
         TOKEN_LPAREN,
@@ -14,6 +15,8 @@ typedef struct TOKEN_STRUCT
         TOKEN_RBRACE,
         TOKEN_COMMA,
         TOKEN_PLUS,
+        TOKEN_DIV,
+        TOKEN_MUL,
         TOKEN_EOF
     } type;
 
@@ -21,4 +24,8 @@ typedef struct TOKEN_STRUCT
 } token_T;
 
 token_T* init_token(int type, char* value);
+
+const char* token_type_to_str(int type);
+
+char* token_to_str(token_T* token);
 #endif
